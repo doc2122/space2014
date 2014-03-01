@@ -20,14 +20,14 @@
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Assignment 1</string>
+         <string>EVE Movements</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="exampleBtn">
         <property name="text">
-         <string>Make a Cylinder</string>
+         <string>Twirl</string>
         </property>
        </widget>
       </item>
