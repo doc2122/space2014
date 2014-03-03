@@ -19,9 +19,19 @@ class Assignment1Widget(PyGlassWidget):
         super(Assignment1Widget, self).__init__(parent, **kwargs)
         self.exampleBtn.clicked.connect(self._handleExampleButton)
         self.homeBtn.clicked.connect(self._handleReturnHome)
+        # self.heightBox.valueChanged.connect(self.setHeight)
+        # self.stepSizeBox.valueChanged.connect(self.setStepSize)
 
 #===================================================================================================
 #                                                                                 H A N D L E R S
+#     def setHeight(self, value):
+#         global height
+#         height = value
+#
+#     def setStepSize(self, value):
+#         global stepSize
+#         stepSize = value
+
 
 #___________________________________________________________________________________________________ _handleReturnHome
     def _handleExampleButton(self):
@@ -37,13 +47,18 @@ class Assignment1Widget(PyGlassWidget):
         # cmds.select(c)
         # response = nimble.createRemoteResponse(globals())
         # response.put('name', c)
+        self.outputLabel.setText("Total animation keyframes:   PROCESSING")
+        print("Total animation keyframes:   PROCESSING")
+        height = self.heightBox.value()
+        stepSize = self.stepSizeBox.value()
+        originalStepSize = stepSize
         cmds.select('EVE')
-        height = 25.0
+        #height = 25.0
         numTwirls = 2.5
         interval = height / numTwirls
         currentHeight = 0.0
         rotateAngle = 0.0
-        stepSize = .02
+        #stepSize = .02
         count = 0;
         cmds.setAttr('EVE.rotateY', 0.0)
         armliftAngleR = 0.0
@@ -52,31 +67,38 @@ class Assignment1Widget(PyGlassWidget):
         while(currentHeight <= height):
             # cmds.setAttr('EVE.rotateY', rotateAngle)
             if(currentHeight >= 1*(height/2)):
-                stepSize = .015
+                stepSize = (originalStepSize * 3.0)/4.0
+                rotateAngle = rotateAngle + .75
                 if(armliftAngleL >= -50.0 and armliftAngleR <= 50):
-                    armliftAngleL -= .1
-                    armliftAngleR += .1
+                    armliftAngleL -= (.1/.02)* stepSize
+                    armliftAngleR += (.1 / .02) * stepSize
 
-
+            # print("**left arm angle: " + str(armliftAngleL))
+            # print("**right arm angle: " + str(armliftAngleR))
             cmds.setKeyframe('arm_left', attribute='rotateX', value=armliftAngleL, t=count)
             cmds.setKeyframe('arm_right', attribute='rotateX', value=armliftAngleR, t=count)
             cmds.setKeyframe('EVE', attribute='translateY', value = currentHeight, t=count )
             cmds.setKeyframe('EVE', attribute='rotateY', value = rotateAngle, t=count )
-            rotateAngle = rotateAngle + 1
+            if(currentHeight < 1*(height/2)):
+                rotateAngle = rotateAngle + 1
             #print("Keyframe i: " + str(count) + " Rotate angle: " + str(rotateAngle))
             #cmds.setAttr('EVE.translateY', currentHeight)
             currentHeight += stepSize
             count += 1
-        # for i in range (360/2):
-        #     rotateAngle = rotateAngle + .5
-        #     cmds.setKeyframe('EVE', attribute='rotateY', value = rotateAngle, t=count )
-        #     count += 1
+            print("Step size: " + str(stepSize))
+            print("Current height: " + str(currentHeight))
+        for i in range (360/2):
+            rotateAngle = rotateAngle + .6
+            cmds.setKeyframe('EVE', attribute='rotateY', value = rotateAngle, t=count )
+            count += 1
         #stepSize = .015
         while(currentHeight >= 0):
             # cmds.setAttr('EVE.rotateY', rotateAngle)
             if(armliftAngleL <=0 and armliftAngleR >= 0):
-                    armliftAngleL += .01
-                    armliftAngleR -= .01
+                    armliftAngleL += (.01 / .02)*stepSize
+                    armliftAngleR -= (.01 / .02)* stepSize
+            # print("**left arm angle: " + str(armliftAngleL))
+            # print("**right arm angle: " + str(armliftAngleR))
             cmds.setKeyframe('arm_left', attribute='rotateX', value=armliftAngleL, t=count)
             cmds.setKeyframe('arm_right', attribute='rotateX', value=armliftAngleR, t=count)
             cmds.setKeyframe('EVE', attribute='translateY', value = currentHeight, t=count )
@@ -86,9 +108,13 @@ class Assignment1Widget(PyGlassWidget):
             #cmds.setAttr('EVE.translateY', currentHeight)
             currentHeight -= stepSize
             count += 1
-
-
+            print("Step size: " + str(stepSize))
+            print("Current height: " + str(currentHeight))
+        self.outputLabel.setText("Total animation keyframes:   " + str(count))
+        print("Height: " + str(height))
+        print("Step size: " + str(stepSize))
         print('Total key frames created: ' + str(count))
+
 
 #___________________________________________________________________________________________________ _handleReturnHome
     def _handleReturnHome(self):
