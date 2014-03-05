@@ -25,6 +25,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="SpaceExample">
+        <property name="text">
+         <string>SpaceExample</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="homeBtn">
         <property name="text">
          <string>Return Home</string>
