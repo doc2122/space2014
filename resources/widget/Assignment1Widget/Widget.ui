@@ -254,9 +254,9 @@
           </font>
          </property>
          <property name="text">
-          <string>1.  To twirl, open graphics/EVE/scenes/eve/eve_with_texture.ma and select a height and step size value below. 
+          <string>1.  To twirl, open graphics/EVE/scenes/eve/eve_with_texture2.ma and select a height and step size value below. 
 
-By default, a controlled twirl uses a height value of 25 and step size value of 0.02. A larger step size value increases the amount of movement in between keyframes, and therefore increases the speed.
+By default, a controlled twirl uses a height value of 25 and step size value of 0.2. A larger step size value increases the amount of movement in between keyframes, and therefore increases the speed.
 
 2.  Press the Twirl button. Once key framing is complete, check the keyframe output below and set the duration of the animation in Maya.</string>
          </property>
@@ -333,7 +333,7 @@ By default, a controlled twirl uses a height value of 25 and step size value of 
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
         </widget>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -418,13 +418,13 @@ By default, a controlled twirl uses a height value of 25 and step size value of 
                <double>0.010000000000000</double>
               </property>
               <property name="maximum">
-               <double>0.160000000000000</double>
+               <double>2.000000000000000</double>
               </property>
               <property name="singleStep">
-               <double>0.010000000000000</double>
+               <double>0.050000000000000</double>
               </property>
               <property name="value">
-               <double>0.020000000000000</double>
+               <double>0.200000000000000</double>
               </property>
              </widget>
             </item>
