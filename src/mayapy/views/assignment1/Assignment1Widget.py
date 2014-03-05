@@ -56,7 +56,7 @@ class Assignment1Widget(PyGlassWidget):
         #height = 25.0
         numTwirls = 2.5
         interval = height / numTwirls
-        currentHeight = 0.0
+        currentHeight = -20.0
         rotateAngle = 0.0
         #stepSize = .02
         count = 0;
@@ -64,14 +64,19 @@ class Assignment1Widget(PyGlassWidget):
         armliftAngleR = 0.0
         armliftAngleL = 0.0
 
+        cmds.camera()
+        cmds.select('camera1')
+        cmds.move(12.0, 10.0, 10.0, relative=True)
+        cmds.aimConstraint('EVE', 'camera1', offset=(0, -90, 0))
+
         while(currentHeight <= height):
             # cmds.setAttr('EVE.rotateY', rotateAngle)
             if(currentHeight >= 1*(height/2)):
                 stepSize = (originalStepSize * 3.0)/4.0
-                rotateAngle = rotateAngle + .75
+                rotateAngle = rotateAngle + 5
                 if(armliftAngleL >= -50.0 and armliftAngleR <= 50):
-                    armliftAngleL -= (.1/.02)* stepSize
-                    armliftAngleR += (.1 / .02) * stepSize
+                    armliftAngleL -= 2
+                    armliftAngleR += 2
 
             # print("**left arm angle: " + str(armliftAngleL))
             # print("**right arm angle: " + str(armliftAngleR))
@@ -87,23 +92,23 @@ class Assignment1Widget(PyGlassWidget):
             count += 1
             print("Step size: " + str(stepSize))
             print("Current height: " + str(currentHeight))
-        for i in range (360/2):
-            rotateAngle = rotateAngle + .6
+        for i in range (360/4):
+            rotateAngle = rotateAngle + 3
             cmds.setKeyframe('EVE', attribute='rotateY', value = rotateAngle, t=count )
             count += 1
-        #stepSize = .015
+        stepSize = ((originalStepSize * 3.0)/4.0)/2
         while(currentHeight >= 0):
             # cmds.setAttr('EVE.rotateY', rotateAngle)
-            if(armliftAngleL <=0 and armliftAngleR >= 0):
-                    armliftAngleL += (.01 / .02)*stepSize
-                    armliftAngleR -= (.01 / .02)* stepSize
+            #if(armliftAngleL <=0 and armliftAngleR >= 0):
+                    #armliftAngleL += 2
+                    #armliftAngleR -= 2
             # print("**left arm angle: " + str(armliftAngleL))
             # print("**right arm angle: " + str(armliftAngleR))
             cmds.setKeyframe('arm_left', attribute='rotateX', value=armliftAngleL, t=count)
             cmds.setKeyframe('arm_right', attribute='rotateX', value=armliftAngleR, t=count)
             cmds.setKeyframe('EVE', attribute='translateY', value = currentHeight, t=count )
             cmds.setKeyframe('EVE', attribute='rotateY', value = rotateAngle, t=count )
-            rotateAngle = rotateAngle + .5
+            rotateAngle = rotateAngle + 1
             #print("Keyframe i: " + str(count) + " Rotate angle: " + str(rotateAngle))
             #cmds.setAttr('EVE.translateY', currentHeight)
             currentHeight -= stepSize
