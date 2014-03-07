@@ -92,6 +92,7 @@ class Assignment3Widget(PyGlassWidget):
 
         cmds.move(aimPt_2_x, aimPt_2_y, aimPt_2_z, cam)
         cmds.setKeyframe( cam, t=i )
+        cmds.setKeyframe( 'SolarPanels', attribute='rotateZ', value=0, t=i)
 
         while i < aimPt_3_frames:
             cmds.setKeyframe( 'Wheel', attribute='rotateY', value=rStat, t=i )
@@ -101,15 +102,9 @@ class Assignment3Widget(PyGlassWidget):
         cmds.move(aimPt_3_x, aimPt_3_y, aimPt_3_z, cam)
         cmds.aimConstraint('spaceStation', 'camera1', offset = (0, -90, 0))
         cmds.setKeyframe( cam, t=i )
+        cmds.setKeyframe( 'SolarPanels', attribute='rotateZ', value=90, t=i)
 
         while i < endPtFrames:
             cmds.setKeyframe( 'Wheel', attribute='rotateY', value=rStat, t=i )
             rStat = rStat + rotStation
             i += 1
-
-        # try:
-        #     bcmds.sendCommandBatch()
-        # except MayaCommandException, err:
-        #     print 'ERROR: Run failed'
-        #     print err
-        #     raise
