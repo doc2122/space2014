@@ -30,37 +30,85 @@ class Assignment3Widget(PyGlassWidget):
 
     def _handleCreate(self):
 
-        rSun = rStat = 0
-
+        # set initial rotations to zero
+        rStat = 0
+        # get requested number of frames
         frmCnt = int(self.numFrames.text())
-
+        # get degrees pre frame rotation for sun
         rotSun = int(self.sunDeg.text())
-
+        # get degrees pre frame for station whell
         rotStation = int(self.stationDeg.text())
+        # get number of frames to wait at sun
+        #waitSun = int(self.waitSun.text())
 
-        #w = cmds.select("Wheel")
-        #s = cmds.select("pSphere1")
+        sunFrames = 100
+        aimPt_2_frames = 100 + sunFrames
+        aimPt_3_frames = 100 + aimPt_2_frames
+        endPtFrames = 50 + aimPt_3_frames
 
-        #print w
-        #print s
 
-        print frmCnt
-        print rotSun
-        print rotStation
+
+        aimPt_1_x = 0.0
+        aimPt_1_y = 0.0
+        aimPt_1_z = 725.0
+
+        aimPt_2_x = -70.0
+        aimPt_2_y = 0.0
+        aimPt_2_z = 725.0
+
+        aimPt_3_x = 20.0
+        aimPt_3_y = 20.0
+        aimPt_3_z = 0.0
+
+        # import sun
+        cmds.file('/Users/doc/PycharmProjects/space2014/graphics/SpaceStation/scenes/sun.ma', i=True)
+        # move sun away from station
+        cmds.move(0, 0, 655, 'pSphere1')
+        # import station
+        cmds.file('/Users/doc/PycharmProjects/space2014/SpaceStation/scenes/station.ma', i=True)
+        cam = cmds.camera()
+        # move camera out beyond the s
+
 
         #
         #  Set up batch commands
-        bcmds = nimble.createCommandsBatch()
+        #bcmds = nimble.createCommandsBatch()
+        cmds.move(aimPt_1_x, aimPt_1_y, aimPt_1_z, cam)
+        #cmds.aimConstraint( 'spaceStation', 'camera1' )
+        cmds.setKeyframe( cam, t=0 )
 
-        for i in range( frmCnt ):
-            rSun = rSun + rotSun
+        i = 0
+
+        while i < sunFrames:
+
+            cmds.setKeyframe( 'Wheel', attribute='rotateY', value=rStat, t=i )
             rStat = rStat + rotStation
-            bcmds.setKeyframe( 'Wheel', attribute='rotateY', value=rStat, t=i )
-            bcmds.setKeyframe( 'pSphere1', attribute='rotateY', value=rSun, t=i )
+            i += 1
 
-        try:
-            bcmds.sendCommandBatch()
-        except MayaCommandException, err:
-            print 'ERROR: Run failed'
-            print err
-            raise
+        while i < aimPt_2_frames:
+            cmds.setKeyframe( 'Wheel', attribute='rotateY', value=rStat, t=i )
+            rStat = rStat + rotStation
+            i += 1
+
+        cmds.move(aimPt_2_x, aimPt_2_y, aimPt_2_z, cam)
+        cmds.setKeyframe( cam, t=i )
+
+        while i < aimPt_3_frames:
+            cmds.setKeyframe( 'Wheel', attribute='rotateY', value=rStat, t=i )
+            rStat = rStat + rotStation
+            i += 1
+
+        cmds.move(aimPt_3_x, aimPt_3_y, aimPt_3_z, cam)
+        cmds.setKeyframe( cam, t=i )
+
+        while i < endPtFrames:
+            cmds.setKeyframe( 'Wheel', attribute='rotateY', value=rStat, t=i )
+            rStat = rStat + rotStation
+            i += 1
+
+        # try:
+        #     bcmds.sendCommandBatch()
+        # except MayaCommandException, err:
+        #     print 'ERROR: Run failed'
+        #     print err
+        #     raise
