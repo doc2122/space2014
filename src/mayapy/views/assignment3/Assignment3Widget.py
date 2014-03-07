@@ -57,7 +57,7 @@ class Assignment3Widget(PyGlassWidget):
         aimPt_2_z = 725.0
 
         aimPt_3_x = 20.0
-        aimPt_3_y = 20.0
+        aimPt_3_y = 9.0
         aimPt_3_z = 0.0
 
         # import sun
@@ -65,7 +65,8 @@ class Assignment3Widget(PyGlassWidget):
         # move sun away from station
         cmds.move(0, 0, 655, 'pSphere1')
         # import station
-        cmds.file('/Users/doc/PycharmProjects/space2014/SpaceStation/scenes/station.ma', i=True)
+        cmds.file('/Users/doc/PycharmProjects/space2014/graphics/SpaceStation/scenes/station.ma', i=True)
+        cmds.move(0, -10, 0, 'spaceStation')
         cam = cmds.camera()
         # move camera out beyond the s
 
@@ -74,7 +75,7 @@ class Assignment3Widget(PyGlassWidget):
         #  Set up batch commands
         #bcmds = nimble.createCommandsBatch()
         cmds.move(aimPt_1_x, aimPt_1_y, aimPt_1_z, cam)
-        #cmds.aimConstraint( 'spaceStation', 'camera1' )
+
         cmds.setKeyframe( cam, t=0 )
 
         i = 0
@@ -99,6 +100,7 @@ class Assignment3Widget(PyGlassWidget):
             i += 1
 
         cmds.move(aimPt_3_x, aimPt_3_y, aimPt_3_z, cam)
+        cmds.aimConstraint('spaceStation', 'camera1', offset = (0, -90, 0))
         cmds.setKeyframe( cam, t=i )
 
         while i < endPtFrames:
