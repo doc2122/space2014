@@ -66,7 +66,6 @@ class Assignment3Widget(PyGlassWidget):
         cmds.move(0, 0, 655, 'pSphere1')
         # import station
         cmds.file('/Users/doc/PycharmProjects/space2014/graphics/SpaceStation/scenes/station.ma', i=True)
-        cmds.move(0, -10, 0, 'spaceStation')
         cam = cmds.camera()
         # move camera out beyond the s
 
