@@ -3,6 +3,7 @@
 # Scott Ernst
 
 import os
+import platform
 import nimble
 from nimble import cmds
 from nimble import MayaCommandException
@@ -111,4 +112,4 @@ class Assignment3Widget(PyGlassWidget):
             i += 1
 
         print 'Total number of frames = ', endPtFrames
-        print os.environ
+        print platform.system()
