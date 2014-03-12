@@ -19,12 +19,36 @@ class Assignment2Widget(PyGlassWidget):
         super(Assignment2Widget, self).__init__(parent, **kwargs)
         self.SpaceShipEnterButton.clicked.connect(self._handleSpaceShipEnterButton)
         self.SpaceShipAndAsteroid.clicked.connect(self._handleSpaceShipAndAsteroid)
+        self.Camera1a.clicked.connect(self._handleCamera1a)
+        self.Camera2a.clicked.connect(self._handleCamera2a)
+        self.Camera1b.clicked.connect(self._handleCamera1b)
+        self.Camera2b.clicked.connect(self._handleCamera2b)
+        self.Camera3b.clicked.connect(self._handleCamera3b)
         self.homeBtn.clicked.connect(self._handleReturnHome)
 
 
 #===================================================================================================
 #
-#                                                                             H A N D L E R S
+#                                                                         H A N D L E R S
+#  Cameras
+
+    def _handleCamera1a(self):
+        cmds.lookThru( 'camera1' )
+
+    def _handleCamera2a(self):
+        cmds.lookThru( 'camera2' )
+
+    def _handleCamera1b(self):
+        cmds.lookThru( 'camera1' )
+
+    def _handleCamera2b(self):
+        cmds.lookThru( 'camera2' )
+
+    def _handleCamera3b(self):
+        cmds.lookThru( 'camera3' )
+
+
+
     def _handleSpaceShipEnterButton(self):
         cmds.file('$HOME/PycharmProjects/space2014/graphics/SpaceShip/scenes/SpaceShipEnter.ma',i=True)
         scale = 0
