@@ -2,6 +2,7 @@
 # (C)2013
 # Scott Ernst
 
+import os
 import nimble
 from nimble import cmds
 from nimble import MayaCommandException
@@ -58,13 +59,13 @@ class Assignment3Widget(PyGlassWidget):
         aimPt_3_z = float(self.cam3z.text())
 
         # import sun
-        cmds.file('/Users/doc/PycharmProjects/space2014/graphics/SpaceStation/scenes/sun.ma', i=True)
+        cmds.file('$HOME/PycharmProjects/space2014/graphics/SpaceStation/scenes/sun.ma', i=True)
         # move sun away from station
         cmds.move(0, 0, 655, 'pSphere1')
         # import station
-        cmds.file('/Users/doc/PycharmProjects/space2014/graphics/SpaceStation/scenes/station.ma', i=True)
+        cmds.file('$HOME/PycharmProjects/space2014/graphics/SpaceStation/scenes/station.ma', i=True)
         # import background
-        cmds.file('/Users/doc/PycharmProjects/space2014/graphics/SpaceStation/scenes/stage.ma', i=True)
+        cmds.file('$HOME/PycharmProjects/space2014/graphics/SpaceStation/scenes/stage.ma', i=True)
 
         # create a new camera
         cam = cmds.camera()
@@ -108,3 +109,6 @@ class Assignment3Widget(PyGlassWidget):
             cmds.setKeyframe( 'Wheel', attribute='rotateY', value=rStat, t=i )
             rStat = rStat + rotStation
             i += 1
+
+        print 'Total number of frames = ', endPtFrames
+        print os.environ
