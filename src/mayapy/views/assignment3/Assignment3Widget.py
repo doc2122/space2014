@@ -32,33 +32,30 @@ class Assignment3Widget(PyGlassWidget):
 
         # set initial rotations to zero
         rStat = 0
-        # get requested number of frames
-        frmCnt = int(self.numFrames.text())
-        # get degrees pre frame rotation for sun
-        rotSun = int(self.sunDeg.text())
-        # get degrees pre frame for station whell
-        rotStation = int(self.stationDeg.text())
-        # get number of frames to wait at sun
-        #waitSun = int(self.waitSun.text())
 
-        sunFrames = 100
-        aimPt_2_frames = 100 + sunFrames
-        aimPt_3_frames = 100 + aimPt_2_frames
+        # get degrees pre frame for station whell
+        rotStation = int(self.ssr.text())
+
+        # set number of frames to shoot at each camera location
+        aimPt_1_frames = int(self.cam1f.text())
+        aimPt_2_frames = int(self.cam2f.text()) + aimPt_1_frames
+        aimPt_3_frames = int(self.cam3f.text()) + aimPt_2_frames
         endPtFrames = 50 + aimPt_3_frames
 
+        # camera position 1
+        aimPt_1_x = float(self.cam1x.text())
+        aimPt_1_y = float(self.cam1y.text())
+        aimPt_1_z = float(self.cam1z.text())
 
+        # camera position 2
+        aimPt_2_x = float(self.cam2x.text())
+        aimPt_2_y = float(self.cam2y.text())
+        aimPt_2_z = float(self.cam2z.text())
 
-        aimPt_1_x = 0.0
-        aimPt_1_y = 0.0
-        aimPt_1_z = 725.0
-
-        aimPt_2_x = -70.0
-        aimPt_2_y = 0.0
-        aimPt_2_z = 725.0
-
-        aimPt_3_x = 20.0
-        aimPt_3_y = 9.0
-        aimPt_3_z = 0.0
+        # camera position 3
+        aimPt_3_x = float(self.cam3x.text())
+        aimPt_3_y = float(self.cam3y.text())
+        aimPt_3_z = float(self.cam3z.text())
 
         # import sun
         cmds.file('/Users/doc/PycharmProjects/space2014/graphics/SpaceStation/scenes/sun.ma', i=True)
@@ -66,24 +63,26 @@ class Assignment3Widget(PyGlassWidget):
         cmds.move(0, 0, 655, 'pSphere1')
         # import station
         cmds.file('/Users/doc/PycharmProjects/space2014/graphics/SpaceStation/scenes/station.ma', i=True)
+        # import background
+        cmds.file('/Users/doc/PycharmProjects/space2014/graphics/SpaceStation/scenes/stage.ma', i=True)
+
+        # create a new camera
         cam = cmds.camera()
-        # move camera out beyond the s
 
-
-        #
-        #  Set up batch commands
-        #bcmds = nimble.createCommandsBatch()
+        # move camera to first position
         cmds.move(aimPt_1_x, aimPt_1_y, aimPt_1_z, cam)
 
         cmds.setKeyframe( cam, t=0 )
 
-        i = 0
+        i = 1
 
-        while i < sunFrames:
+        while i < aimPt_1_frames:
 
             cmds.setKeyframe( 'Wheel', attribute='rotateY', value=rStat, t=i )
             rStat = rStat + rotStation
             i += 1
+
+        cmds.setKeyframe( cam, t=i )
 
         while i < aimPt_2_frames:
             cmds.setKeyframe( 'Wheel', attribute='rotateY', value=rStat, t=i )
@@ -102,7 +101,8 @@ class Assignment3Widget(PyGlassWidget):
         cmds.move(aimPt_3_x, aimPt_3_y, aimPt_3_z, cam)
         cmds.aimConstraint('spaceStation', 'camera1', offset = (0, -90, 0))
         cmds.setKeyframe( cam, t=i )
-        cmds.setKeyframe( 'SolarPanels', attribute='rotateZ', value=90, t=i)
+        cmds.setKeyframe( 'SolarPanels', attribute='rotateZ', value=float(self.spe.text()), t=i)
+        # cmds.setKeyframe( 'SolarPanels', attribute='rotateX', value=float(self.spa.text()), t=i)
 
         while i < endPtFrames:
             cmds.setKeyframe( 'Wheel', attribute='rotateY', value=rStat, t=i )
