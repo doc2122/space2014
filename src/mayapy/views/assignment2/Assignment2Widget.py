@@ -26,6 +26,7 @@ class Assignment2Widget(PyGlassWidget):
 #
 #                                                                             H A N D L E R S
     def _handleSpaceShipEnterButton(self):
+        cmds.file('$HOME/PycharmProjects/space2014/graphics/SpaceShip/scenes/SpaceShipEnter.ma',i=True)
         scale = 0
         scaleC = 0
         scaleX = 0
@@ -174,6 +175,7 @@ class Assignment2Widget(PyGlassWidget):
             doorRot = doorRot + 1.5
 
     def _handleSpaceShipAndAsteroid(self):
+        cmds.file('$HOME/PycharmProjects/space2014/graphics/SpaceShip/scenes/Asteroid.ma',i=True)
         rotY = 0
         rotX = 0
         rotZ = 0
