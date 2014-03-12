@@ -19,22 +19,67 @@
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QPushButton" name="assignment1Btn">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>EVE</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resource_Home.qrc">
+          <normaloff>:/images/EVE.png</normaloff>:/images/EVE.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>50</width>
+          <height>33</height>
+         </size>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="assignment2Btn">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Spaceship</string>
+        </property>
+        <property name="icon">
+         <iconset resource="resource_Home.qrc">
+          <normaloff>:/images/spaceShip.png</normaloff>:/images/spaceShip.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>50</width>
+          <height>25</height>
+         </size>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="assignment3Btn">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Space Station</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>://images/spaceStation.png</normaloff>://images/spaceStation.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>50</width>
+          <height>43</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -69,6 +114,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource_Home.qrc"/>
+ </resources>
  <connections/>
 </ui>
