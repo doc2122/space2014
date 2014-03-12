@@ -18,7 +18,7 @@ class Assignment2Widget(PyGlassWidget):
         """Creates a new instance of Assignment2Widget."""
         super(Assignment2Widget, self).__init__(parent, **kwargs)
         self.SpaceShipEnterButton.clicked.connect(self._handleSpaceShipEnterButton)
-        #self.SpaceShipAndAsteroid.clicked.connect(self._handleSpaceShipAndAsteroid)
+        self.SpaceShipAndAsteroid.clicked.connect(self._handleSpaceShipAndAsteroid)
         self.homeBtn.clicked.connect(self._handleReturnHome)
 
 
@@ -172,6 +172,96 @@ class Assignment2Widget(PyGlassWidget):
 
             time = time + 1
             doorRot = doorRot + 1.5
+
+    def _handleSpaceShipAndAsteroid(self):
+        rotY = 0
+        rotX = 0
+        rotZ = 0
+        moveX = 0
+        centerR = 0
+
+        aX = -1000
+        aY = 352.834
+        sX = 0
+        doorRot = 0
+
+
+        time = 0
+        time2 = 175
+
+
+        cmds.camera()
+        cmds.move(-90, 370.0, 40.0, relative = True)
+        cmds.aimConstraint( 'pCylinder11', 'camera1', offset = (0,-85,0)  )
+        cmds.camera()
+        cmds.move(-1000, 360.0, 40.0, relative = True)
+        cmds.aimConstraint( 'asteroid', 'camera2', offset = (0,-90,0) )
+        cmds.camera()
+        cmds.move(-1158.453, 371.553, -.461, relative = True)
+        cmds.aimConstraint( 'asteroid', 'camera3', offset = (0,-90,0) )
+
+
+
+
+        for o in range(327):
+            cmds.setKeyframe('Beam', attribute = 'visibility', value = 0, t=time)
+            cmds.setKeyframe( 'asteroid', attribute='translateX', value = aX, t=time )
+            cmds.setKeyframe( 'asteroid', attribute='translateY', value = aY, t=time )
+            cmds.setKeyframe( 'asteroid', attribute='rotateY', value = rotY, t=time )
+            cmds.setKeyframe( 'asteroid', attribute='rotateX', value = rotX, t=time )
+            cmds.setKeyframe( 'asteroid', attribute='rotateZ', value = rotZ, t=time )
+            cmds.setKeyframe( 'group', attribute='rotateY', value = centerR, t=time )
+
+            rotY = rotY + .25
+            rotX = rotX + .25
+            rotZ = rotZ + .25
+            aX = aX + 2.6
+            centerR = centerR + .5
+
+            time = time + 1
+
+
+        for c in range (47):
+            cmds.setKeyframe('spaceDoor', attribute='rotateY', value = doorRot, t=time2)
+            time2 = time2 + 1
+            doorRot = doorRot - 1.5
+
+        for k in range(105):
+            cmds.setKeyframe( 'SpaceShip1', attribute='translateX', value = moveX, t=time2 )
+            moveX = moveX - 1.92
+            time2 = time2 + 1
+
+        for j in range (47):
+            cmds.setKeyframe('spaceDoor', attribute='rotateY', value = doorRot, t=time2)
+            time2 = time2 + 1
+            doorRot = doorRot + 1.5
+
+        for i in range (500):
+            cmds.setKeyframe('Beam', attribute = 'visibility', value = 1, t=time)
+            cmds.setKeyframe( 'SpaceShip1', attribute='translateX', value = moveX, t=time )
+            cmds.setKeyframe( 'asteroid', attribute='translateX', value = aX, t=time )
+            cmds.setKeyframe( 'group', attribute='rotateY', value = centerR, t=time )
+
+
+            centerR = centerR + .5
+            aX = aX - 1.92
+            moveX = moveX - 1.92
+
+            time = time + 1
+
+        for i in range (350):
+            cmds.setKeyframe('Beam', attribute = 'visibility', value = 0, t=time)
+            cmds.setKeyframe( 'asteroid', attribute='translateX', value = aX, t=time )
+            cmds.setKeyframe( 'group', attribute='rotateY', value = centerR, t=time )
+            cmds.setKeyframe( 'asteroid', attribute='rotateY', value = rotY, t=time )
+            cmds.setKeyframe( 'asteroid', attribute='rotateX', value = rotX, t=time )
+            cmds.setKeyframe( 'asteroid', attribute='rotateZ', value = rotZ, t=time )
+
+            centerR = centerR + .5
+            aX = aX - 1.92
+
+            time = time + 1
+
 
 #___________________________________________________________________________________________________ _handleReturnHome
     def _handleReturnHome(self):

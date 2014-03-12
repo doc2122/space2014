@@ -25,9 +25,16 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="SpaceExample">
+       <widget class="QPushButton" name="SpaceShipEnterButton">
         <property name="text">
-         <string>SpaceExample</string>
+         <string>Space Ship Enter Animation</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="SpaceShipAndAsteroid">
+        <property name="text">
+         <string>Space Ship and Asteroid Animation</string>
         </property>
        </widget>
       </item>
