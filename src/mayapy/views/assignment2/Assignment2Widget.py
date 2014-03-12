@@ -17,7 +17,8 @@ class Assignment2Widget(PyGlassWidget):
     def __init__(self, parent, **kwargs):
         """Creates a new instance of Assignment2Widget."""
         super(Assignment2Widget, self).__init__(parent, **kwargs)
-        self.SpaceShipEnterButton.clicked.connect(self._handleSpaceExampleButton)
+        self.SpaceShipEnterButton.clicked.connect(self._handleSpaceShipEnterButton)
+        #self.SpaceShipAndAsteroid.clicked.connect(self._handleSpaceShipAndAsteroid)
         self.homeBtn.clicked.connect(self._handleReturnHome)
 
 
