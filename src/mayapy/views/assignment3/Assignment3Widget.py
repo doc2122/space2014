@@ -74,6 +74,8 @@ class Assignment3Widget(PyGlassWidget):
         # move camera to first position
         cmds.move(aimPt_1_x, aimPt_1_y, aimPt_1_z, cam)
 
+        cmds.lookThru(cam)
+
         cmds.setKeyframe( cam, t=0 )
 
         i = 1
