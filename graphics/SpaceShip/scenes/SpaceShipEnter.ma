@@ -1,6 +1,6 @@
 //Maya ASCII 2014 scene
 //Name: SpaceShipEnter.ma
-//Last modified: Wed, Mar 12, 2014 01:16:07 PM
+//Last modified: Wed, Mar 12, 2014 08:15:31 PM
 //Codeset: UTF-8
 requires maya "2014";
 requires -nodeType "mentalrayFramebuffer" -nodeType "mentalrayOutputPass" -nodeType "mentalrayRenderPass"
@@ -90,15 +90,16 @@ fileInfo "osv" "Mac OS X 10.9.2";
 fileInfo "license" "student";
 createNode transform -s -n "persp";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 1142.4431572533708 270.67951453242375 -475.55318777785669 ;
-	setAttr ".r" -type "double3" -12.338352729603105 112.59999999999982 0 ;
+	setAttr ".t" -type "double3" 542.93845090410593 490.52292604410655 -218.41597300833712 ;
+	setAttr ".r" -type "double3" 167.66164727039688 67.400000000000176 -180 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999986;
-	setAttr ".coi" 1266.725937820926;
+	setAttr ".coi" 583.39443221201941;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
+	setAttr ".tp" -type "double3" 16.782826265300255 365.86066329473789 0.60147479693773231 ;
 	setAttr ".hc" -type "string" "viewSet -p %camera";
 	setAttr -s 3 ".b";
 createNode transform -s -n "top";
@@ -5749,7 +5750,7 @@ createNode mesh -n "finished:combo:pasted__polySurfaceShape4" -p "finished:combo
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
 createNode transform -n "spaceDoor" -p "finished:combo:group4";
-	setAttr ".r" -type "double3" -0.90295669032409454 -1.5000000000000002 1.1240721216568255 ;
+	setAttr ".r" -type "double3" -0.90295669032409454 -10.5 1.1240721216568255 ;
 	setAttr ".rp" -type "double3" 0 9.185643196105957 -1.7881393432617188e-07 ;
 	setAttr ".rpt" -type "double3" 8.0758620942050589e-08 0 1.9275637191149472e-08 ;
 	setAttr ".sp" -type "double3" 0 9.185643196105957 -1.7881393432617188e-07 ;
@@ -6805,7 +6806,7 @@ createNode shadingEngine -n "Asteroid:background:lambert2SG";
 	setAttr ".ro" yes;
 createNode materialInfo -n "Asteroid:background:materialInfo1";
 createNode file -n "Asteroid:background:file1";
-	setAttr ".ftn" -type "string" "/Users/coryolivieri/PycharmProjects/space2014/graphics/Space Background/images/deep-space-hd-wallpaper-hd-wallpapers-background-in-space-nature-landscape-images-space-backgrounds.jpg";
+	setAttr ".ftn" -type "string" "$HOME/PycharmProjects/space2014/graphics/Space Background/images/deep-space-hd-wallpaper-hd-wallpapers-background-in-space-nature-landscape-images-space-backgrounds.jpg";
 createNode place2dTexture -n "Asteroid:background:place2dTexture1";
 createNode polySphere -n "Asteroid:polySphere1";
 createNode materialInfo -n "finished:materialInfo1";
@@ -20301,8 +20302,8 @@ createNode animCurveTA -n "spaceDoor_rotateY";
 		 453 -13.5 454 -12.000000000000002 455 -10.5 456 -9 457 -7.4999999999999991 458 -6.0000000000000009
 		 459 -4.5 460 -3.0000000000000004 461 -1.5000000000000002;
 select -ne :time1;
-	setAttr ".o" 477;
-	setAttr ".unw" 477;
+	setAttr ".o" 313;
+	setAttr ".unw" 313;
 select -ne :renderPartition;
 	setAttr -s 47 ".st";
 select -ne :initialShadingGroup;
